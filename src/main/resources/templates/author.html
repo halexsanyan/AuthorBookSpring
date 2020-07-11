@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+All Authors: <br>
+<table border="1">
+    <tr>
+        <td>Name</td>
+        <td>Surname</td>
+        <td>Emali</td>
+        <td>Gender</td>
+        <td>Biography</td>
+        <td>Delete</td>
+        <td>Uptade</td>
+    </tr>
+    <div th:each="author: ${authors}" th:remove="tag">
+        <tr>
+
+            <td th:text="${author.name}" th:value="${author.name}"></td>
+            <td th:text="${author.surname}" th:value="${author.surname}"></td>
+            <td th:text="${author.email}" th:value="${author.email}"></td>
+            <td th:text="${author.gender}" th:value="${author.gender}"></td>
+            <td th:text="${author.bio}" th:value="${author.bio}"></td>
+            <td><a th:href="@{/deleteAuthor(id=${author.id})}">Delete</a></td>
+            <td><a th:href="@{/updateAuthor(id=${author.id})}">Update</a></td>
+
+
+        </tr>
+    </div>
+
+</table>
+
+</body>
+</html>
