@@ -21,11 +21,11 @@ All Authors: <br>
             <td th:text="${book.title}"></td>
             <td th:text="${book.description}"></td>
             <td th:text="${book.price}"></td>
-            <div th:each="author: ${authors}" th:if="${author.id==book.authorId}" th:remove="tag">
+            <div th:each="author: ${authors}" th:if="${author.id==book.author.id}" th:remove="tag">
                 <td th:value="${author.id}" th:text="${author.name +' '+ author.surname }"></td>
             </div>
             <td><a th:href="@{/deleteBook(id=${book.id})}">Delete</a></td>
-            <td><a th:href="@{/updateBook(id=${book.id})}">Update</a></td>
+            <td><a th:href="@{/editBook(id=${book.id})}">Update</a></td>
 
         </tr>
     </div>

@@ -22,6 +22,7 @@ public class Book {
     private String title;
     private String description;
     private double price;
-    private int authorId;
+    @ManyToOne
+    private Author author;
 
 }

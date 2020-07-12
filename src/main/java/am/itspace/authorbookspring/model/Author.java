@@ -19,16 +19,16 @@ public class Author {
     @Id
     @GeneratedValue()
     private int id;
-    @Column
+
     private String name;
-    @Column
+
     private String surname;
-    @Column
+
     private String email;
     @Enumerated(value = EnumType.STRING)
     private Gender gender;
-    @Column
+
     private String bio;
 
-
+    private String profilePic;
 }

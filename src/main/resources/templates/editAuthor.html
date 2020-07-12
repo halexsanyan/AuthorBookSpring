@@ -10,12 +10,12 @@ Update Author:
     <input type="text" name="name" th:value="${author.name}" placeholder="Please inpute name"><br>
     <input type="text" name="surname" th:value="${author.surname}" placeholder="Please inpute surname"><br>
     <input type="text" name="email" th:value="${author.email}" placeholder="Please inpute email"><br>
-    <select name="gender">
-        <option disabled selected>Assing gender</option>
+    <select name="gender" >
+<!--        <option disabled selected >Assing gender</option>-->
         <option value="MALE">MALE</option>
         <option value="FEMALE">FEMALE</option>
     </select><br>
-    <textarea name="bio" th:value="${author.bio}" placeholder="Please input biography"></textarea><br>
+    <textarea name="bio" th:text="${author.bio}" placeholder="Please input biography"></textarea><br>
     <input type="submit" value="Ok">
 </form>
 

@@ -5,9 +5,10 @@
     <title>Title</title>
 </head>
 <body>
+<h3 th:text="${msg}" th:if="${msg != null}"></h3>
 <div style="width: 50%;float: left">
     Add Author:
-    <form action="/addAuthor" method="post">
+    <form action="/saveAuthor" method="post" enctype="multipart/form-data">
         <input type="text" name="name" placeholder="Please inpute name"><br>
         <input type="text" name="surname" placeholder="Please inpute surname"><br>
         <input type="text" name="email" placeholder="Please inpute email"><br>
@@ -16,6 +17,7 @@
             <option value="MALE">MALE</option>
             <option value="FEMALE">FEMALE</option>
         </select><br>
+        <input type="file" name="image"/><br>
         <textarea name="bio" placeholder="Please input biography"></textarea><br>
         <input type="submit" value="Add Author">
     </form>
@@ -23,11 +25,11 @@
 
 
 Add Book:
-<form action="/addBook" method="post">
+<form action="/saveBook" method="post">
     <input type="text" name="title" placeholder="Please inpute title"><br>
     <textarea name="description" placeholder="Please input description"></textarea><br>
     <input type="text" name="price" placeholder="Please inpute price"><br>
-    <select name="authorId">
+    <select name="author.id">
         <option disabled selected value>Assign user</option>
         <div th:each="author: ${authors}" th:remove="tag">
 
