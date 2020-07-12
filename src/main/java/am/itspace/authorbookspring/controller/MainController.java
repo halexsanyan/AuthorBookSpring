@@ -1,6 +1,7 @@
 package am.itspace.authorbookspring.controller;
 
 import am.itspace.authorbookspring.model.Author;
+import am.itspace.authorbookspring.model.Book;
 import am.itspace.authorbookspring.repository.AuthorRepository;
 import am.itspace.authorbookspring.repository.BookRepostory;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +10,7 @@ import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -44,18 +46,26 @@ public class MainController {
         String msg = author.getId() > 0 ? "Author was updated" : "Author was added";
         String ctrlName = author.getId() > 0 ? "/author" : "/";
         String name =System.currentTimeMillis()+"_"+file.getOriginalFilename();
-        File image =new File(uploadDir);
+        File image =new File(uploadDir,name);
         file.transferTo(image);
         author.setProfilePic(name);
         authorRepository.save(author);
-        return "redirect:"+ctrlName+"/?msg="+msg;
+        return "redirect:"+ctrlName+"?msg="+msg;
     }
 
     @GetMapping("/author")
-    public String authorPage(ModelMap modelMap) {
+    public String authorPage(ModelMap modelMap,@RequestParam(name = "msg", required = false) String msg) {
         List<Author> all = authorRepository.findAll();
         modelMap.addAttribute("authors", all);
+        modelMap.addAttribute("msg",msg);
         return "author";
+    }
+
+    @GetMapping("/editAuthor")
+    public String edit(@RequestParam("id") int id, Model model) {
+        Author author = authorRepository.getOne(id);
+        model.addAttribute("author", author);
+        return "editAuthor";
     }
 
     @GetMapping("/deleteAuthor")

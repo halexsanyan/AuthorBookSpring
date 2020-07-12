@@ -6,15 +6,17 @@
 </head>
 <body>
 Update Author:
-<form th:action="@{/updateAuthor(id=${author.id})}" method="post" >
-    <input type="text" name="name" th:value="${author.name}" placeholder="Please inpute name"><br>
-    <input type="text" name="surname" th:value="${author.surname}" placeholder="Please inpute surname"><br>
-    <input type="text" name="email" th:value="${author.email}" placeholder="Please inpute email"><br>
+<form action="/saveAuthor" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="id" th:value="${author.id}">
+    <input type="text" name="name" th:value="${author.name}" ><br>
+    <input type="text" name="surname" th:value="${author.surname}" ><br>
+    <input type="text" name="email" th:value="${author.email}"><br>
     <select name="gender" >
-<!--        <option disabled selected >Assing gender</option>-->
+        <option disabled selected th:text="${author.gender }" >Assing gender</option>
         <option value="MALE">MALE</option>
         <option value="FEMALE">FEMALE</option>
     </select><br>
+    <input type="file" name="image"/><br>
     <textarea name="bio" th:text="${author.bio}" placeholder="Please input biography"></textarea><br>
     <input type="submit" value="Ok">
 </form>

@@ -40,11 +40,12 @@ public class BookController {
     }
 
     @GetMapping("/book")
-    public String bookPage(ModelMap modelMap) {
+    public String bookPage(ModelMap modelMap, @RequestParam(name = "msg", required = false) String msg) {
         List<Book> allBooks = bookRepostory.findAll();
         List<Author> allAuthors = authorRepository.findAll();
         modelMap.addAttribute("authors", allAuthors);
         modelMap.addAttribute("books", allBooks);
+        modelMap.addAttribute("msg", msg);
         return "book";
     }
 
