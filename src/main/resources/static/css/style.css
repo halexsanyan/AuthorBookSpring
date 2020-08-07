@@ -1,0 +1,95 @@
+body {
+    background-color: aliceblue;
+}
+
+.author {
+    max-width: 350px;
+    margin: auto;
+    border-radius: 5px;
+    background: yellowgreen;
+    padding: 20px;
+
+}
+
+.author input[type=text], input[type=file],input[type=password],input[type=email], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+
+.author input[type=submit] {
+    width: 100%;
+    background-color: cadetblue;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.author input[type=submit]:hover {
+    background: #000000;
+}
+
+.book {
+    max-width: 350px;
+    margin: auto;
+    border-radius: 5px;
+    background: yellowgreen;
+    padding: 20px;
+}
+.book input[type=text], textarea, select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.book input[type=submit] {
+    width: 100%;
+    background-color: cadetblue;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.book input[type=submit]:hover {
+    background: #000000;
+}
+
+.authorButton {
+    background-color: yellowgreen;
+    color: white;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+.authorButton:hover{
+    background: darkgreen;
+}
+
+.bookButton {
+    background-color: yellowgreen;
+    color: white;
+    text-transform: uppercase;
+    text-decoration: none;
+
+}
+.bookButton:hover{
+    background: darkgreen;
+}
+
+.error {
+    color: red;
+}

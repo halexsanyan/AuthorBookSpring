@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 <h3 th:text="${msg}" th:if="${msg != null}"></h3>
-
+<header th:insert="fragment/general.html :: header"></header>
 All Authors: <br>
 <table border="1">
     <tr>
         <td>Name</td>
         <td>Surname</td>
         <td>Emali</td>
-        <td>Gender</td>
+        <td>Rol</td>
         <td>Picture</td>
-        <td>Biography</td>
+<!--        <td>Biography</td>-->
         <td>Delete</td>
         <td>Edit</td>
     </tr>
@@ -24,13 +25,13 @@ All Authors: <br>
 
             <td th:text="${author.name}" th:value="${author.name}"></td>
             <td th:text="${author.surname}" th:value="${author.surname}"></td>
-            <td th:text="${author.email}" th:value="${author.email}"></td>
-            <td th:text="${author.gender}" th:value="${author.gender}"></td>
+            <td th:text="${author.username}" th:value="${author.username}"></td>
+            <td th:text="${author.role}" th:value="${author.role}"></td>
             <td> <img th:src="@{/image(name=${author.profilePic})}" width="20"
                       th:if="${author.profilePic != null && author.profilePic.length() != 0}"/> </td>
-            <td th:text="${author.bio}" th:value="${author.bio}"></td>
-            <td><a th:href="@{/deleteAuthor(id=${author.id})}">Delete</a></td>
-            <td><a th:href="@{/editAuthor(id=${author.id})}">Edit</a></td>
+<!--            <td th:text="${author.bio}" th:value="${author.bio}"></td>-->
+            <td><a th:href="@{/author/delete(id=${author.id})}">Delete</a></td>
+            <td><a th:href="@{/author/edit(id=${author.id})}">Edit</a></td>
 
 
         </tr>

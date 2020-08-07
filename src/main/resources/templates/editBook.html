@@ -5,15 +5,16 @@
     <title>Title</title>
 </head>
 <body>
-<form action="/saveBook" method="post">
+<header th:insert="fragment/general.html :: header"></header>
+<form action="/author/save" method="post">
     <input type="hidden" name="id" th:value="${book.id}">
     <input type="text" name="title" th:value="${book.title}" ><br>
     <textarea name="description"  th:text="${book.description}" ></textarea><br>
     <input type="text" name="price" th:value="${book.price}"><br>
-    <select name="author.id">
+    <select name="user.id">
 <!--        <option disabled selected value>Assign user</option>-->
 
-        <option  th:each="author: ${authors}" th:value="${author.id}" th:text="${author.name +' '+ author.surname }" th:selected="${book.author.id == author.id }"> </option>
+        <option  th:each="author: ${authors}" th:value="${author.id}" th:text="${author.name +' '+ author.surname }" th:selected="${book.user.id == author.id }"> </option>
 
 
     </select><br>

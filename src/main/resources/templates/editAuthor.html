@@ -5,19 +5,20 @@
     <title>Title</title>
 </head>
 <body>
-Update Author:
-<form action="/saveAuthor" method="post" enctype="multipart/form-data">
+Edit Author: <br>
+<header th:insert="fragment/general.html :: header"></header>
+<form action="/author/save" method="post" enctype="multipart/form-data">
     <input type="hidden" name="id" th:value="${author.id}">
     <input type="text" name="name" th:value="${author.name}" ><br>
     <input type="text" name="surname" th:value="${author.surname}" ><br>
-    <input type="text" name="email" th:value="${author.email}"><br>
-    <select name="gender" >
-        <option disabled selected th:text="${author.gender }" >Assing gender</option>
-        <option value="MALE">MALE</option>
-        <option value="FEMALE">FEMALE</option>
+    <input type="text" name="email" th:value="${author.username}"><br>
+    <select name="role" >
+        <option disabled selected th:text="${author.role }" >Assing gender</option>
+        <option value="USER">User</option>
+        <option value="ADMIN">Admin</option>
     </select><br>
     <input type="file" name="image"/><br>
-    <textarea name="bio" th:text="${author.bio}" placeholder="Please input biography"></textarea><br>
+<!--    <textarea name="bio" th:text="${author.bio}" placeholder="Please input biography"></textarea><br>-->
     <input type="submit" value="Ok">
 </form>
 

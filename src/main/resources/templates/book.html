@@ -3,12 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 </head>
 <body>
 <h3 th:text="${msg}" th:if="${msg != null}"></h3>
-
+<header th:insert="fragment/general.html :: header"></header>
 All Authors: <br>
-<table border="1">
+<table id="books" border="1">
+    <thead>
     <tr>
         <td>Title</td>
         <td>Description</td>
@@ -17,22 +21,32 @@ All Authors: <br>
         <td>Delete</td>
         <td>Uptade</td>
     </tr>
-    <div th:each="book: ${books}" th:remove="tag">
-        <tr>
-
-            <td th:text="${book.title}"></td>
-            <td th:text="${book.description}"></td>
-            <td th:text="${book.price}"></td>
-            <div th:each="author: ${authors}" th:if="${author.id==book.author.id}" th:remove="tag">
-                <td th:value="${author.id}" th:text="${author.name +' '+ author.surname }"></td>
-            </div>
-            <td><a th:href="@{/deleteBook(id=${book.id})}">Delete</a></td>
-            <td><a th:href="@{/editBook(id=${book.id})}">Edit</a></td>
-
-        </tr>
-    </div>
-
+    </thead>
+    <tbody>
+    <tr th:each="book: ${books.content}" >
+        <td th:text="${book.title}"></td>
+        <td th:text="${book.description}"></td>
+        <td th:text="${book.price}"></td>
+        <td th:text="${book.user.name+' '+book.user.surname}"></td>
+<!--        <div th:each="author: ${authors}" th:if="${author.id==book.user.id}" th:remove="tag">-->
+<!--            <td th:value="${author.id}" th:text="${author.name +' '+ author.surname }"></td>-->
+<!--        </div>-->
+        <td><a th:href="@{/book/delete(id=${book.id})}">Delete</a></td>
+        <td><a th:href="@{/book/edit(id=${book.id})}">Edit</a></td>
+    </tr>
+    </tbody>
 </table>
+<div th:if="${books.totalPages>0}" class="pagination"
+     th:each="pageNumber:${pageNumbers}">
+    <a th:href="@{/book(size=${books.size}, page=${pageNumber})}"
+    th:text="${pageNumber}"
+    th:class="${pageNumber==books.number+1} ? active"></a>
 
+</div>
+<script>
+    // $(document).ready( function () {
+    //     $('#books').DataTable();
+    // } );
+</script>
 </body>
 </html>

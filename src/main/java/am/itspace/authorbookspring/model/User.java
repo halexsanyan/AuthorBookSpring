@@ -1,6 +1,5 @@
 package am.itspace.authorbookspring.model;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,23 +11,21 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Entity()
-@Table(name = "author")
-public class Author {
+@Entity
+@Table(name = "user")
+public class User {
 
     @Id
-    @GeneratedValue()
+    @GeneratedValue
     private int id;
-
     private String name;
-
     private String surname;
+    private String username;
+    private String password;
 
-    private String email;
-    @Enumerated(value = EnumType.STRING)
-    private Gender gender;
-
-    private String bio;
-
+    private boolean active;
     private String profilePic;
+    @Enumerated(value = EnumType.STRING)
+    private Role role;
+    private String token;
 }

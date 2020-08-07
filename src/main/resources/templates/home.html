@@ -3,46 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 <h3 th:text="${msg}" th:if="${msg != null}"></h3>
-<div style="width: 50%;float: left">
-    Add Author:
-    <form action="/saveAuthor" method="post" enctype="multipart/form-data">
-        <input type="text" name="name" placeholder="Please inpute name"><br>
-        <input type="text" name="surname" placeholder="Please inpute surname"><br>
-        <input type="text" name="email" placeholder="Please inpute email"><br>
-        <select name="gender">
-            <option disabled selected value>Assign gender</option>
-            <option value="MALE">MALE</option>
-            <option value="FEMALE">FEMALE</option>
-        </select><br>
-        <input type="file" name="image"/><br>
-        <textarea name="bio" placeholder="Please input biography"></textarea><br>
-        <input type="submit" value="Add Author">
+<header th:insert="fragment/general.html :: header"></header>
+<div class="author" style="float: left">
+    <h3 th:text="#{home.add.author}">Add Author:</h3>
+    <form th:action="@{/author/save}" method="post" enctype="multipart/form-data" th:object="${user}">
+        <lebel for="name">Name</lebel>
+        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" th:class="error"></span>
+        <input type="text" name="name" placeholder="Please inpute name">
+        <lebel for="surname">Surname</lebel>
+        <span th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}" th:class="error"></span>
+        <input type="text" name="surname" placeholder="Please inpute surname">
+        <lebel for="username">Email</lebel>
+        <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}" th:class="error"></span>
+        <input type="text" name="username" placeholder="Please inpute email">
+        <lebel for="password">Password</lebel>
+        <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" th:class="error"></span>
+        <input type="password" name="password" placeholder="Please inpute password">
+        <lebel for="confirmPassword">Password</lebel>
+        <span th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}" th:class="error"></span>
+        <input type="password" name="confirmPassword" placeholder="Please inpute password once again">
+        <lebel for="role">Role</lebel>
+        <select name="role" id="gender">
+            <option disabled selected value>Assign Role</option>
+            <option value="USER">User</option>
+            <option value="ADMIN">Admin</option>
+        </select>
+        <lebel for="image">Choose Image</lebel>
+        <input type="file" name="image"/>
+        <input type="submit" value="Add">
     </form>
 </div>
 
+<div class="book">
+    <h3>Add Book:</h3>
+    <form action="/book/save" method="post">
+        <lebel for="tille">Tilte</lebel>
+        <input type="text" name="title" placeholder="Please inpute title">
+        <lebel for="description">Description</lebel>
+        <textarea name="description" placeholder="Please input description"></textarea>
+        <lebel for="price">Price</lebel>
+        <input type="text" name="price" placeholder="Please inpute price">
+        <lebel for="book-authors">Authors</lebel>
+        <select name="user.id" id="book-authors">
+            <option disabled selected value>Assign user</option>
+            <div th:each="author: ${authors}" th:remove="tag">
 
-Add Book:
-<form action="/saveBook" method="post">
-    <input type="text" name="title" placeholder="Please inpute title"><br>
-    <textarea name="description" placeholder="Please input description"></textarea><br>
-    <input type="text" name="price" placeholder="Please inpute price"><br>
-    <select name="author.id">
-        <option disabled selected value>Assign user</option>
-        <div th:each="author: ${authors}" th:remove="tag">
+                <option th:value="${author.id}" th:text="${author.name +' '+ author.surname }"></option>
+            </div>
 
-            <option th:value="${author.id}" th:text="${author.name +' '+ author.surname }"></option>
-        </div>
-
-    </select><br>
-    <input type="submit" value="Add Book">
-</form>
+        </select><br>
+        <input type="submit" value="Add Book">
+    </form>
 </div>
-<div style="margin-top: 60px">
-    <a href="/author">See all authors</a><br><br>
-    <a href="/book">See all books</a>
+
+</div>
+<div style="margin-top: -400px; margin-left: 67%">
+    <a href="/author" class="authorButton">
+        See all authors
+    </a>
+</div>
+<div style="margin-left: 67%; margin-top: 50px">
+    <a href="/book" class="bookButton">See all books</a>
 </div>
 </body>
 </html>
