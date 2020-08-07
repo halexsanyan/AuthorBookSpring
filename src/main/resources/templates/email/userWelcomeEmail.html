@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<body bgcolor="black">
-<div style="color:white" >
- Dear <span th:text="${user.name}"></span><br>
+<body >
+<div style="background-color:black ;color:white" >
+<span th:text="#{email.text.dear}" ></span>  <span th:text="${user.name}"></span><br>
  You have successfully registred.Please activate your account by clicking on:
  <a th:href="${url}">Activate</a>
 </div>

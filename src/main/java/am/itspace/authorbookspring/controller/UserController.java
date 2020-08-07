@@ -22,9 +22,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.mail.MessagingException;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -59,8 +61,8 @@ public class UserController {
     }
 
     @PostMapping("/author/save")
-    public String addAuthor(@Valid @ModelAttribute("user") UserRequestDto userRequest, BindingResult result,Model model,
-                            @RequestParam("image") MultipartFile file) {
+    public String addAuthor(@Valid @ModelAttribute("user") UserRequestDto userRequest, BindingResult result, Model model,
+                            @RequestParam("image") MultipartFile file, Locale locale) throws MessagingException {
 
 //        if (!TextUtil.VALID_EMAIL_ADDRESS_REGEX.matcher(userRequest.getUsername()).find()){
 //            return "redirect:/?msg=Email does not valid";
@@ -84,13 +86,13 @@ public class UserController {
                 .surname(userRequest.getSurname())
                 .username(userRequest.getUsername())
                 .password(passwordEncoder.encode(userRequest.getPassword()))
+                .role(userRequest.getRole())
                 .active(false)
                 .token(UUID.randomUUID().toString())
                 .build();
         userService.saveUser(user, file);
         String link = "http://localhost:8080/author/activate?email=" + userRequest.getUsername() + "&token=" + user.getToken();
-        emailService.send(userRequest.getUsername(), "Welcome", "Dear " + userRequest.getName() + " You have successfully registred. " +
-                "Please activate your account by clicking on:" + link);
+        emailService.sendHtmlEmil(userRequest.getUsername(), "Welcome", user,link,"email/userWelcomeEmail.html",locale);
         return "redirect:" + ctrlName + "?msg=" + msg;
     }
 

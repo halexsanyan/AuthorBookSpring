@@ -26,6 +26,6 @@ public class User {
     private boolean active;
     private String profilePic;
     @Enumerated(value = EnumType.STRING)
-    private Role role;
+    private Role role=Role.USER;
     private String token;
 }

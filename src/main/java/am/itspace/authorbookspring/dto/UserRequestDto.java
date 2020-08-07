@@ -20,6 +20,7 @@ public class UserRequestDto {
     private String name;
     @NotBlank(message = "Surname is requaired")
     private String surname;
+    @NotBlank(message = "Email is requaired")
     @Email(message = "Email isn't valid")
     private String username;
     @Size(min = 6,message = "Passwore lenght sould be at least 6 symbol")
